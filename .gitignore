@@ -1,0 +1,41 @@
+# Byte-compiled / optimized / DLL files (Python)
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+backend/venv/
+backend/data/
+# Flask-specific
+instance/
+.env
+.env.*
+/frontend/node_modules/
+# ReactJS (frontend)
+node_modules/
+build/
+dist/
+.env.local
+.env.development
+.env.production
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Docker
+*.pid
+*.log
+
+# System
+Thumbs.db
