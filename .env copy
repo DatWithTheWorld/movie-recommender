@@ -1,5 +1,4 @@
 FLASK_ENV=development 
-DATABASE_URL=postgresql://admin:password@localhost:5432/movie_db 
-YOUTUBE_API_KEY=aizaSyApOcYDTxo9pi6K2JGor4GPKGGhVLvvBUI
+DATABASE_URL=postgresql://admin:password@localhost:5432/movie_db
 SECRET_KEY=9bccde9c93d30a1a2864ce53cbc21530
 API_URL=http://localhost:5000/
