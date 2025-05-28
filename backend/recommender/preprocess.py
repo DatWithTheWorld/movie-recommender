@@ -4,8 +4,6 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-from app import app, db  # ← Import app ở đây
-from models.movie import Movie
 
 def load_movielens_data():
     movies = pd.read_csv('data/movielens/movies.csv')
@@ -14,6 +12,9 @@ def load_movielens_data():
     return movies, ratings, tags
 
 def preprocess_data():
+    
+    from app import app, db  # ← Import app ở đây
+    from models.movie import Movie
     movies, ratings, tags = load_movielens_data()
 
     movies = movies.drop_duplicates(subset=['title'])
@@ -21,7 +22,7 @@ def preprocess_data():
 
     ratings_count = ratings.groupby('movieId').size().reset_index(name='rating_count')
     movies = movies.merge(ratings_count, on='movieId', how='left')
-    movies['popularity'] = pd.qcut(movies['rating_count'], 5, labels=['Low', 'Medium-Low', 'Medium', 'High'], duplicates='drop')
+    movies['popularity'] = pd.qcut(movies['rating_count'], 4, labels=['Low', 'Medium-Low', 'Medium', 'High'], duplicates='drop')
 
     movie_tags = tags.groupby('movieId')['tag'].apply(lambda x: ' '.join(x.dropna().astype(str))).reset_index()
     movies = movies.merge(movie_tags, on='movieId', how='left')
