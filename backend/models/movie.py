@@ -10,3 +10,4 @@ class Movie(db.Model):
     trailer_local = db.Column(db.String(255))
     director = db.Column(db.String(255))
     actors = db.Column(db.String(255))
+    
