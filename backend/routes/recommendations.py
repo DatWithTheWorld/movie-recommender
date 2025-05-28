@@ -17,7 +17,7 @@ def get_recommendations(user_id):
     recs = hybrid_recommendations(user_id, None, movies)
     rec_movies = []
     for movie_id, score in recs[:10]:
-        movie = db.session.query(Movie).filter_by(id=movie_id).first()
+        movie = db.session.query(Movie).filter_by(id=int(movie_id)).first()
         if movie:
             rec_movies.append({
                 'movie_id': movie_id,

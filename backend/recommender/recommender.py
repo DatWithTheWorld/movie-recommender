@@ -24,7 +24,8 @@ def content_based_filtering(movie_id, movies):
     idx = idx[0]
     sim_scores = list(enumerate(cosine_sim[idx]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    return [(movies.iloc[i[0]]['id'], i[1]) for i in sim_scores[1:10] if i[1] > 0]
+    return [(int(movies.iloc[i[0]]['id']), i[1]) for i in sim_scores[1:10] if i[1] > 0]
+
 
 def hybrid_recommendations(user_id, movie_id, movies, ratings=None):
     print(f"Running recommendations for user_id={user_id}, movie_id={movie_id}")
