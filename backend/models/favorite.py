@@ -1,6 +1,6 @@
 from app import db
 
 class Favorite(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    movie_id = db.Column(db.Integer, db.ForeignKey('movie.id'))
+    __tablename__ = 'favorite'
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    movie_id = db.Column(db.Integer, db.ForeignKey('movie.id'), primary_key=True)
