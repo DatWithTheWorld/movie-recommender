@@ -6,7 +6,7 @@ bp = Blueprint('analytics', __name__)
 
 @bp.route('/analytics', methods=['GET'])
 def get_analytics():
-    movies, ratings, _, _ = load_movielens_data()
+    movies, ratings, _= load_movielens_data()
     plot_genre_distribution(movies)
     plot_rating_distribution(ratings)
     plot_correlation_matrix(movies, ratings)
