@@ -27,13 +27,13 @@ function Analytics() {
       <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Analytics</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {analytics.genre_distribution && (
-          <Chart data={genreData} title="Genre Distribution" />
+         <img  src={`http://localhost:5000${analytics.genre_distribution}`} alt="Rating Distribution" className="w-full" />
         )}
         {analytics.rating_distribution && (
-          <img src={analytics.rating_distribution} alt="Rating Distribution" className="w-full" />
+          <img  src={`http://localhost:5000${analytics.rating_distribution}`} alt="Rating Distribution" className="w-full" />
         )}
         {analytics.correlation_matrix && (
-          <img src={analytics.correlation_matrix} alt="Correlation Matrix" className="w-full" />
+          <img src={`http://localhost:5000${analytics.correlation_matrix}`} alt="Correlation Matrix" className="w-full" />
         )}
       </div>
     </div>
