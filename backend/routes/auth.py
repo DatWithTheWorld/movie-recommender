@@ -9,21 +9,25 @@ bp = Blueprint('auth', __name__)
 
 @bp.route('/register', methods=['POST'])
 def register():
-    data = request.json
-    username = data.get('username')
-    password = data.get('password')
-    email = data.get('email')
-
-    if not username or not password or not email:
-        return jsonify({'error': 'Missing required fields'}), 400
-
-    # Kiểm tra trùng username hoặc email
-    if User.query.filter_by(username=username).first():
-        return jsonify({'error': 'Username already exists'}), 409
-    if User.query.filter_by(email=email).first():
-        return jsonify({'error': 'Email already exists'}), 409
-
     try:
+        data = request.json
+        print("Received data:", data)  # In ra dữ liệu client gửi lên
+
+        username = data.get('username')
+        password = data.get('password')
+        email = data.get('email')
+
+        if not username or not password or not email:
+            return jsonify({'error': 'Missing required fields'}), 400
+
+        existing_user = User.query.filter(
+            (User.username == username) | (User.email == email)
+        ).first()
+
+        if existing_user:
+            print("User already exists:", existing_user)
+            return jsonify({'message': 'User already registered'}), 200
+
         hashed_password = generate_password_hash(password)
         user = User(username=username, password=hashed_password, email=email)
         db.session.add(user)
@@ -35,9 +39,11 @@ def register():
 
         return jsonify({'message': 'User registered'}), 201
 
-    except IntegrityError:
+    except Exception as e:
+        print("Error:", str(e))  # In ra lỗi
         db.session.rollback()
-        return jsonify({'error': 'Registration failed due to integrity error'}), 500
+        return jsonify({'error': 'Internal server error', 'details': str(e)}), 500
+
 
 @bp.route('/login', methods=['POST'])
 def login():

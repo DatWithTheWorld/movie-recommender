@@ -10,7 +10,10 @@ function Favorites() {
   useEffect(() => {
     if (user) {
       axios.get(`http://localhost:5000/favorites/${user.user_id}`)
-        .then(response => setFavorites(response.data))
+        .then(response => {         
+          setFavorites(response.data)
+        }
+      )
         .catch(error => console.error(error));
     }
   }, [user]);
@@ -18,7 +21,7 @@ function Favorites() {
   const handleRemoveFavorite = (movieId) => {
     axios.delete(`http://localhost:5000/favorites/${user.user_id}/${movieId}`)
       .then(() => {
-        setFavorites(favorites.filter(f => f.movie_id !== movieId));
+        setFavorites(favorites.filter(f => f.id !== movieId));
       })
       .catch(error => console.error(error));
   };
@@ -33,7 +36,7 @@ function Favorites() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {favorites.map(fav => (
           <div key={fav.movie_id} className="relative">
-            <MovieCard movie={fav} />
+            <MovieCard ey={fav.movie_id}  movie={fav} />
             <button
               onClick={() => handleRemoveFavorite(fav.movie_id)}
               className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded"
