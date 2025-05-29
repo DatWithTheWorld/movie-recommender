@@ -1,18 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext';
-import { AuthProvider } from './context/AuthContext';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import MovieList from './pages/MovieList';
-import MovieDetail from './pages/MovieDetail';
-import Recommendations from './pages/Recommendations';
-import Profile from './pages/Profile';
-import Comments from './pages/Comments';
-import Favorites from './pages/Favorites';
-import WatchHistory from './pages/WatchHistory';
-import Analytics from './pages/Analytics';
-import TrailerManager from './pages/TrailerManager';
-import './index.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
+import { AuthProvider } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import MovieList from "./pages/MovieList";
+import MovieDetail from "./pages/MovieDetail";
+import Recommendations from "./pages/Recommendations";
+import Profile from "./pages/Profile";
+import Comments from "./pages/Comments";
+import Favorites from "./pages/Favorites";
+import WatchHistory from "./pages/WatchHistory";
+import Analytics from "./pages/Analytics";
+import TrailerManager from "./pages/TrailerManager";
+import Chatbot from "./components/Chatbot/Chatbot";
+import "./index.css";
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/trailers" element={<TrailerManager />} />
             </Routes>
+
+            {/* Chatbot component - will appear on all pages */}
+            <Chatbot />
           </div>
         </Router>
       </AuthProvider>

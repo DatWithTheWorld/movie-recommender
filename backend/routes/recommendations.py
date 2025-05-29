@@ -19,11 +19,12 @@ def get_recommendations(user_id):
     for movie_id, score in recs[:10]:
         movie = db.session.query(Movie).filter_by(id=int(movie_id)).first()
         if movie:
+            print(movie.__dict__)
             rec_movies.append({
-                'movie_id': movie_id,
+                'id': movie.id,
                 'title': movie.title,
                 'genres': movie.genres,
-                'score': score
+                'score': float(score)
             })
     return jsonify(rec_movies)
 
